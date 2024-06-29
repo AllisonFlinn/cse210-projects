@@ -1,100 +1,13 @@
 using System;
 using System.Formats.Asn1;
-
-class Entry
-{
-    public string _date;
-    public string _promptText;
-    public string _entryText;
-
-    public Entry(string date, string promptText, string entryText)
-    {
-        _date = date;
-        _promptText = promptText;
-        _entryText = entryText;
-    }
-    
-    public void Display()
-    {
-        Console.WriteLine($"Date: {_date} - Prompt: {_promptText}");
-        Console.WriteLine(_entryText);
-        Console.WriteLine();
-    }
+using entry;
+using journal;
+using promptGenerator;
 
 
-}
 
-class Journal
-{
-   public List<Entry> _entries = new List<Entry>();
 
-   public Journal()
-   {
 
-   }
-
-   public void AddEntry(Entry newEntry)
-   {
-        _entries.Add(newEntry);
-   }
-
-   public void DisplayAll()
-   {
-        foreach (Entry entry in _entries)
-        {
-            entry.Display();
-        }
-   }
-
-   public void SaveToFile(string file)
-   {
-        string header = "date,prompt,entry";
-        using (StreamWriter outputFile = new StreamWriter(file))
-        {
-            outputFile.WriteLine(header);
-            foreach (Entry entry in _entries)
-            {
-                outputFile.WriteLine($"{entry._date},{entry._promptText},{entry._entryText}");
-            }
-
-        }
-   }
-
-   public void LoadFromFile(string file)
-   {
-        string[] lines = System.IO.File.ReadAllLines(file);
-        bool firstLine = true;
-        foreach (string entryString in lines)
-        {
-            if (firstLine)
-            {
-                firstLine = false;
-                continue;
-            }
-            string[] parts = entryString.Split(",");
-            Entry entry = new Entry(parts[0],parts[1],parts[2]);
-            AddEntry(entry);
-        }
-   }
-}
-
-class PromptGenerator
-{
-    public List<string> _prompts = ["Who was the most interesting person I interacted with today?",
-                                    "What was the best part of my day?",
-                                    "How did I see the hand of the Lord in my life today?",
-                                    "What was the strongest emotion I felt today?",
-                                    "If I had one thing I could do over today, what would it be?"];
-    
-    static Random rand = new Random();
-
-    public string GetRandomPrompt()
-    {
-        int numberOfPrompts = _prompts.Count;
-        int randomNumber = rand.Next(0,numberOfPrompts);
-        return _prompts[randomNumber];
-    }
-}
 
 class Program
 {
