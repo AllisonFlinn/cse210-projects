@@ -1,9 +1,11 @@
 using System;
+using scriptureManager;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
+        ScriptureManager scripture = new ScriptureManager();
+        scripture.printScriptures();
     }
 }
