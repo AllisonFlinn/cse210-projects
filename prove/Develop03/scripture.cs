@@ -24,12 +24,12 @@ namespace scripture
 
         private string GetDisplayText()
         {
-
+            return "";
         }
 
         private bool IsCompletelyHidden()
         {
-
+            return false;
         }
     }
 }

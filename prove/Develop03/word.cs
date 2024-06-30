@@ -7,12 +7,8 @@ namespace word
         private string _text;
         private bool _isHidden;
 
-        public Word()
-        {
-            
-        }
 
-        private Word(string _text)
+        public Word(string _text)
         {
 
         }
@@ -29,7 +25,7 @@ namespace word
 
         private bool IsHidden()
         {
-
+            return false;
         }
 
         private string GetDisplayText()

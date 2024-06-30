@@ -1,4 +1,5 @@
 using System;
+using scriptureManager;
 
 namespace reference
 {
@@ -9,24 +10,37 @@ namespace reference
        private int _verse;
        private int _endVerse;
 
-       public Reference()
+        private ScriptureManager sm = new ScriptureManager();
+       
+
+       
+
+        public Reference(string book, int chapter, int verse)
         {
-            
+            _book = book;
+            _chapter = chapter;
+            _verse = verse;
+            _endVerse = verse;
         }
 
-        private Reference(string _book, int _chapter, int _verse)
+        public Reference(string book, int chapter, int startVerse, int endVerse)
+        : this(book, chapter, startVerse)
         {
-
+            _endVerse = endVerse;
         }
 
-        private Reference(string _book, int _chapter, int startVerse, int endVerse)
+        public string GetDisplayText()
         {
-
-        }
-
-        private string GetDisplayText()
-        {
-            
+            string verseText = "";
+            for (int i = _verse; i <= _endVerse; i++)
+            {
+                verseText += sm.getVerse(_book, _chapter, i);
+                if (i != _endVerse)
+                {
+                    verseText += " ";
+                }
+            }
+            return verseText;
         }
     }
 }

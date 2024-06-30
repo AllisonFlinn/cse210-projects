@@ -18,9 +18,9 @@ namespace scriptureManager
         }
 
         /***********************************************************************
-        * PRINT SCRIPTERS
+        * PRINT SCRIPTURES
         *
-        * Discription
+        * Description
         ***********************************************************************/
         public void printScriptures()
         {
@@ -29,6 +29,15 @@ namespace scriptureManager
             {
                 Console.WriteLine("Verse "+ item.Key +"->"+ item.Value);
             }
+        }
+        public string getVerse(string book, int chapter, int verse)
+        {
+            string sentence = $"{book} {chapter}:{verse}";
+            if (_scriptures.ContainsKey(sentence))
+            {
+                throw new ArgumentException($"The scripture {sentence} does not exist.");
+            }
+            return _scriptures[sentence];
         }
     }
 }
