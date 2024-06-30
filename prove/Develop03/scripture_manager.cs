@@ -18,9 +18,8 @@ namespace scriptureManager
         }
 
         /***********************************************************************
-        * PRINT SCRIPTURES
-        *
-        * Description
+        * This Class saves a text file of scriptures into a dictionary for the 
+        program to pull from to display specified scriptures to the terminal. 
         ***********************************************************************/
         public void printScriptures()
         {
