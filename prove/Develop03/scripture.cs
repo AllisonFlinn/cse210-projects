@@ -1,4 +1,6 @@
 using System;
+using System.Dynamic;
+using System.Xml;
 using reference;
 using word;
 
@@ -8,28 +10,62 @@ namespace scripture
     class Scripture
     {
         private Reference _reference;
-        private List<Word> _words;
-
+        private List<Word> _words = new List<Word>();
+    
         
 
-        public Scripture(Reference Reference, string _text)  // the method was given no data type by the assignment?
+        public Scripture(Reference Reference, string text) 
         {
+                _reference = Reference;
+                foreach (var txt in text.Split(" "))
+                {
+                   _words.Add(new Word(txt)); 
 
+                }
         }
 
-        private void HideRandomWords(int numberToHide)
+        public void HideRandomWords(int numberToHide)
         {
-
+            int count = 0;
+            HashSet<int> values = new HashSet<int>(); 
+            Random rand = new Random();
+            while (count != numberToHide && values.Count != _words.Count)
+            {
+                int num = rand.Next(_words.Count);
+                if (values.Contains(num))
+                {
+                    continue;
+                }
+                values.Add(num);
+                if (!_words[num].IsHidden())
+                {
+                    _words[num].Hide();
+                    count ++;
+                }
+            }
+            
         }
 
-        private string GetDisplayText()
+        public string GetDisplayText()
         {
-            return "";
+            string output = _reference.Header();
+            foreach(var w in _words)
+            {
+                output += $" {w.GetDisplayText()}";
+            }
+            return output;
         }
 
-        private bool IsCompletelyHidden()
+        public bool IsCompletelyHidden()
         {
-            return false;
+            foreach(var w in _words)
+            {
+                if (!w.IsHidden())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

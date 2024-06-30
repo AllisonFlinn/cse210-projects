@@ -1,16 +1,48 @@
 using System;
-using scriptureManager;
+using scripture;
 using reference;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Please enter a scripture you wish to master in the following format: (Book Chapter:verse) or (Book Chapter:verse-end verse)");
-        string userInput = Console.ReadLine();
-        Reference input = parseUserInput(userInput);
-        Console.WriteLine(input.GetDisplayText());
-        
+        bool notComplete = true;
+        string text = "";
+        Reference input = new Reference("Genesis",1,1);
+        do {
+            try
+            {
+                Console.WriteLine("Please enter a scripture you wish to master in the following format: (Book Chapter:verse) or (Book Chapter:verse-end verse)");
+                string userInput = Console.ReadLine();
+                input = parseUserInput(userInput);
+                text = input.GetDisplayText();
+                notComplete = false;
+            }
+            catch(ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        } while(notComplete);
+        Scripture script = new Scripture(input, text);
+        string nextInput = "";
+        bool firstIteration = true;
+        while (!script.IsCompletelyHidden() && (nextInput.ToLower() != "quit") )
+        {
+            if (!firstIteration)
+            {
+                script.HideRandomWords(3);
+            }
+            else
+            {
+                firstIteration = false;
+            }
+            Console.WriteLine(script.GetDisplayText());
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue or type 'quit' to finish");
+            nextInput = Console.ReadLine();
+        }
+
     }
 
     static Reference parseUserInput(string referenceString)

@@ -42,5 +42,13 @@ namespace reference
             }
             return verseText;
         }
+        public string Header()
+        {
+            if (_verse != _endVerse)
+            {
+                return $"{_book} {_chapter}:{_verse}-{_endVerse}";
+            }
+            return $"{_book} {_chapter}:{_verse}";
+        }
     }
 }

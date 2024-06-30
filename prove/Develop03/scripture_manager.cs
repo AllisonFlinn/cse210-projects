@@ -13,7 +13,7 @@ namespace scriptureManager
             foreach (var verse in lines)
             {
                 string[] parts = verse.Split("     ");
-                _scriptures.Add(parts[0], parts[1]);
+                _scriptures.Add(parts[0].ToLower(), parts[1]);
             }
         }
 
@@ -33,11 +33,11 @@ namespace scriptureManager
         public string getVerse(string book, int chapter, int verse)
         {
             string sentence = $"{book} {chapter}:{verse}";
-            if (_scriptures.ContainsKey(sentence))
+            if (!_scriptures.ContainsKey(sentence.ToLower()))
             {
                 throw new ArgumentException($"The scripture {sentence} does not exist.");
             }
-            return _scriptures[sentence];
+            return _scriptures[sentence.ToLower()];
         }
     }
 }

@@ -5,32 +5,36 @@ namespace word
     class Word
     {
         private string _text;
-        private bool _isHidden;
+        private bool _isHidden = false;
 
 
-        public Word(string _text)
+        public Word(string text)
         {
-
+            _text = text;
         }
 
-        private void Hide()
+        public void Hide()
         {
-
+            _isHidden = true;
         }
 
-        private void Show()
+        public void Show()
         {
-
+            _isHidden = false;
         }
 
-        private bool IsHidden()
+        public bool IsHidden()
         {
-            return false;
+            return _isHidden;
         }
 
-        private string GetDisplayText()
+        public string GetDisplayText()
         {
-            
+            if (! _isHidden)
+            {
+                return _text;
+            }
+            return new string('_', _text.Length);
         }
     }
 }
