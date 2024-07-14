@@ -1,34 +1,81 @@
-class ChecklistGoal : Goal
+using System;
+
+public class Checklist : Goal 
 {
-    private int _amountCompleted;
-    private int _target;
-    private int _bonus;
-
-    public ChecklistGoal(int target, int bonus)
-        :base()
+    //These variables are only utilized in this class. 
+    private int _reachBonus;
+    private int _bonusPoints;
+    
+    public Checklist() 
+        : base() 
     {
-        _target = target;
-        _bonus = bonus;
+        this._reachBonus = SetReachBonus();
+        this._bonusPoints = SetBonusPoints();
     }
 
-    public void RecordEvent()
+    public Checklist(string name, string description, double points, int timesFinished, int reach, int bonus):
+    base(name, description, points, timesFinished) 
     {
-        //fill in later with override
+
+        this._reachBonus = reach;
+        this._bonusPoints = bonus;
     }
 
-    public bool isComplete()
+    
+    protected int SetReachBonus()
     {
-        //fill in later with override
+        Console.Write("How many times does this goal need to be accomplished for a bonus? ");
+        return int.Parse(Console.ReadLine());
+    }
+    protected int SetBonusPoints()
+    {
+        Console.Write("What is the bonus for accomplishing it that many times?");
+        return int.Parse(Console.ReadLine());
     }
 
-    public string GetDetailsString()
+    //The following six methods are modified from the parent Goal class
+    public override int GetReachBonus()
     {
-        // fill in with override
+        return this._reachBonus;
+    }
+    public override int GetBonusPoints()
+    {
+        return this._bonusPoints;
     }
 
-    public string GetStringRepresentation()
+    public override void ListGoal() 
     {
-        //fill in with override
+        base.ListGoal();
+        Console.Write($" --- Currently completed: {this._timesCompleted}/{this._reachBonus}\n");
     }
-
+    public override bool IsComplete()
+    {
+        if(this._timesCompleted >= this._reachBonus)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+    public override double RecordEvent()
+    {
+        base.RecordEvent();
+        if(IsComplete())
+        {
+            return AwardPoints(this._bonusPoints + this._points);
+        }
+        else 
+        {
+            return AwardPoints(this._points);
+        }
+    }
+    public override string SerializeSelf()
+    {
+        this._formattedString = "checklist";
+        base.SerializeSelf();
+        this._formattedString += $":{this.GetReachBonus()}:{this.GetBonusPoints()}";
+        return this._formattedString;
+    }
 }

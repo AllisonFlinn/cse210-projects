@@ -1,24 +1,39 @@
-class EternalGoal : Goal
+using System;
+
+public class Eternal : Goal 
 {
 
-    public EternalGoal()
-        :base()
+    public Eternal() 
+        : base() 
     {
-        //add variables and what they are here (There were not any listed in the design)
+        
     }
 
-    public void RecordEvent()
+    public Eternal(string name, string description, double points, int timesFinished):
+    base(name, description, points, timesFinished) 
     {
-        //fill in later with override
+        
     }
 
-    public bool isComplete()
+    //The following four methods are modified from the parent Goal class
+    public override bool IsComplete()
     {
-        //fill in later with override
+        return false;
     }
-
-    public string GetStringRepresentation()
+    public override double RecordEvent()
     {
-        //fill in later with override
+        base.RecordEvent();
+        return AwardPoints(this._points);
     }
+    public override string SerializeSelf()
+    {
+        this._formattedString = "eternal";
+        return base.SerializeSelf();
+    }
+    public override void ListGoal() 
+    {
+        base.ListGoal();
+        Console.Write($" --- Eternal Goal\n");
+    }
+    
 }

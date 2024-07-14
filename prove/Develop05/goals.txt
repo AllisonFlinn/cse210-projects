@@ -1,0 +1,7 @@
+35:1
+simple:Make my bed.:I will make my bed in the morning.:10:1
+eternal:Read gospel literature everyday.:I will read/listen to gospel related talks or scriptures daily.:25:1
+simple:Make my bed.:I will make my bed in the morning.:10:0
+eternal:Read gospel literature everyday.:I will read/listen to gospel related talks or scriptures daily.:25:0
+checklist:attend temple:I will attend the temple once a month for six months in a row.:100:0:6:500
+simple:Meet with my bishop for school:I need to get an endorsment from my bishop again.:50:0

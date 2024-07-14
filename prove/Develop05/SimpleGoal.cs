@@ -1,25 +1,44 @@
-class SimpleGoal : Goal
+using System;
+
+public class Simple : Goal 
 {
-    private bool _isComplete = true;
-
-    public SimpleGoal()
-        :base()
+    public Simple() 
+        : base() 
     {
-        //add variables and what they are here
+        
+    }
+    public Simple(string name, string description, double points, int timesFinished):
+    base(name, description, points, timesFinished)
+    {
+
     }
 
-    public void RecordEvent()
+    //The following four methods are modified from the parent Goal class
+    public override bool IsComplete()
     {
-        //fill in later with override
+        if(this._timesCompleted >= 1)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+    public override double RecordEvent()
+    {
+        base.RecordEvent();
+        return AwardPoints(this._points);
+    }
+    public override string SerializeSelf()
+    {
+        this._formattedString = "simple";
+        return base.SerializeSelf();
+    }
+    public override void ListGoal() 
+    {
+        base.ListGoal();
+        Console.Write($" --- Simple Goal\n");
     }
 
-    public bool isComplete()
-    {
-        //fill in later with override
-    }
-
-    public string GetStringRepresentation()
-    {
-        //fill in later with override
-    }
 }
