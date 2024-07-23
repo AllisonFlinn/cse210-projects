@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Address address = new Address("Avenida de la Universidad", "Lima", "Lima", "Peru");
+        Address address = new Address("12558 Benning Rd", "Sunman", "California", "47041");
 
         Lecture lecture = new Lecture("Literary Reading: 'A Perfect Short Story'", "An evening of literary exploration with Valeria Alcala", "November 29, 2024", "9 AM", address, "Valeria Alcala", 120);
         Console.WriteLine();
@@ -19,7 +19,7 @@ class Program
         Console.WriteLine();
         Console.WriteLine(lecture.GenerateShortLecture());
 
-        Address addressR = new Address("Izaguirre", "Los Olivos", "Lima", "Peru");
+        Address addressR = new Address("7422 S 300 E", "Warren", "Indiana", "46792");
 
         Reception reception = new Reception("Devotional for Young Single Adults", "Face to face with Elder Quentin L. Cook for YSA", "August 18, 2024", "9 PM", addressR, "devotional@youngadult.com");
         Console.WriteLine();
